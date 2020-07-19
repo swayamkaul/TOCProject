@@ -31,7 +31,7 @@ int TuringMachineCopy::p_findStateTransition(char sA, char sB){
             return i;
         }
     }
-    throw "Error";
+    throw "Error in copy";
 }
 
 void TuringMachineCopy::p_emmit(int transitionId){

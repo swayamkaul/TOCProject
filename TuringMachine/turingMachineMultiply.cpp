@@ -58,7 +58,7 @@ int TuringMachineMultiply::p_findStateTransition(char sA, char sB){
             return i;
         }
     }
-    throw "Error";
+    throw "Error in multiply";
 }
 
 void TuringMachineMultiply::p_emmit(int transitionId){

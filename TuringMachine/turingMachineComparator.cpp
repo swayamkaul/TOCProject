@@ -8,44 +8,65 @@ TuringMachineComparator::TuringMachineComparator(std::deque<char> & tapeA, std::
     // Initial state transition
     m_states.push_back({e_stateControl::Start,{e_direction::Left,e_direction::Left},{'^','^'},{'n','n'},e_states::init,e_states::getNonZero});
     m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::getNonZero,e_states::getNonZero});
+
     m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Neutral},{'0','1'},{'n','n'},e_states::getNonZero,e_states::getNonZero});
     m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Neutral},{'0','|'},{'n','n'},e_states::getNonZero,e_states::getNonZero});
+
     m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Left},{'1','0'},{'n','n'},e_states::getNonZero,e_states::getNonZero});
     m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Left},{'|','0'},{'n','n'},e_states::getNonZero,e_states::getNonZero});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','1'},{'n','n'},e_states::getNonZero,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::getNonZero,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::getNonZero,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::getNonZero,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','0'},{'n','n'},e_states::toEnd,e_states::lt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::toEnd,e_states::lt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'0','|'},{'n','n'},e_states::toEnd,e_states::gt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::toEnd,e_states::gt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::toEnd,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','1'},{'n','n'},e_states::toEnd,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','0'},{'n','n'},e_states::toEnd,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','1'},{'n','n'},e_states::toEnd,e_states::toEnd});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::toEnd,e_states::token});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::token,e_states::token});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','1'},{'n','n'},e_states::token,e_states::token});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::token,e_states::gt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'0','|'},{'n','n'},e_states::token,e_states::gt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::token,e_states::lt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','0'},{'n','n'},e_states::token,e_states::lt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'0','1'},{'n','n'},e_states::token,e_states::lt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','0'},{'n','n'},e_states::token,e_states::gt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::token,e_states::eq});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','*'},{'n','n'},e_states::lt,e_states::goFrontl});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','*'},{'n','n'},e_states::eq,e_states::goFronte});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','*'},{'n','n'},e_states::gt,e_states::goFrontg});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','0'},{'n','n'},e_states::goFronte,e_states::goFronte});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','1'},{'n','n'},e_states::goFronte,e_states::goFronte});
-    m_states.push_back({e_stateControl::End,{e_direction::Neutral,e_direction::Neutral},{'*','^'},{'n','1'},e_states::goFronte,e_states::hlt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','0'},{'n','n'},e_states::goFrontl,e_states::goFrontl});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','1'},{'n','n'},e_states::goFrontl,e_states::goFrontl});
-    m_states.push_back({e_stateControl::End,{e_direction::Neutral,e_direction::Neutral},{'*','^'},{'n','0'},e_states::goFrontl,e_states::hlt});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','0'},{'n','n'},e_states::goFrontg,e_states::goFrontg});
-    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','1'},{'n','n'},e_states::goFrontg,e_states::goFrontg});
-    m_states.push_back({e_stateControl::End,{e_direction::Neutral,e_direction::Neutral},{'*','^'},{'n','1'},e_states::goFrontg,e_states::hlt});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::getNonZero,e_states::lengthCheck});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::getNonZero,e_states::lengthCheck});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::getNonZero,e_states::lengthCheck});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','1'},{'n','n'},e_states::getNonZero,e_states::lengthCheck});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','1'},{'n','n'},e_states::lengthCheck,e_states::lengthCheck});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::lengthCheck,e_states::lengthCheck});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','1'},{'n','n'},e_states::lengthCheck,e_states::lengthCheckPB});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','0'},{'n','n'},e_states::lengthCheck,e_states::lengthCheckPA});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','|'},{'n','n'},e_states::lengthCheck,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','|'},{'n','n'},e_states::lengthCheck,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'|','|'},{'n','n'},e_states::lengthCheck,e_states::toFrontGTE});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'|','0'},{'n','n'},e_states::lengthCheck,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'|','1'},{'n','n'},e_states::lengthCheck,e_states::toFrontLT});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','1'},{'n','n'},e_states::lengthCheckPA,e_states::lengthCheckPA});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::lengthCheckPA,e_states::lengthCheckPA});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','0'},{'n','n'},e_states::lengthCheckPA,e_states::lengthCheckPA});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','1'},{'n','n'},e_states::lengthCheckPA,e_states::lengthCheckPA});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::lengthCheckPA,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'0','|'},{'n','n'},e_states::lengthCheckPA,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::lengthCheckPA,e_states::toFrontGTE});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::lengthCheckPA,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','0'},{'n','n'},e_states::lengthCheckPA,e_states::toFrontLT});
+    
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','1'},{'n','n'},e_states::lengthCheckPB,e_states::lengthCheckPB});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','0'},{'n','n'},e_states::lengthCheckPB,e_states::lengthCheckPB});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'1','0'},{'n','n'},e_states::lengthCheckPB,e_states::lengthCheckPB});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Left,e_direction::Left},{'0','1'},{'n','n'},e_states::lengthCheckPB,e_states::lengthCheckPB});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'0','|'},{'n','n'},e_states::lengthCheckPB,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'1','|'},{'n','n'},e_states::lengthCheckPB,e_states::toFrontGTE});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','|'},{'n','n'},e_states::lengthCheckPB,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','1'},{'n','n'},e_states::lengthCheckPB,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Neutral},{'|','0'},{'n','n'},e_states::lengthCheckPB,e_states::toFrontLT});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','|'},{'n','n'},e_states::toFrontLT,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','0'},{'n','n'},e_states::toFrontLT,e_states::toFrontLT});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','1'},{'n','n'},e_states::toFrontLT,e_states::toFrontLT});
+
+    m_states.push_back({e_stateControl::End,{e_direction::Neutral,e_direction::Neutral},{'*','^'},{'n','0'},e_states::toFrontLT,e_states::hlt});
+
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','1'},{'n','n'},e_states::toFrontGTE,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','0'},{'n','n'},e_states::toFrontGTE,e_states::toFrontGTE});
+    m_states.push_back({e_stateControl::Normal,{e_direction::Neutral,e_direction::Right},{'*','|'},{'n','n'},e_states::toFrontGTE,e_states::toFrontGTE});
+
+    m_states.push_back({e_stateControl::End,{e_direction::Neutral,e_direction::Neutral},{'*','^'},{'n','1'},e_states::toFrontGTE,e_states::hlt});
 }
 
 int TuringMachineComparator::p_findStateTransition(char sA, char sB){
@@ -54,7 +75,7 @@ int TuringMachineComparator::p_findStateTransition(char sA, char sB){
             return i;
         }
     }
-    throw "Error";
+    throw "Error in comparator";
 }
 
 void TuringMachineComparator::p_emmit(int transitionId){
@@ -138,31 +159,26 @@ void TuringMachineComparator::reset(std::deque<char> & tapeA, std::deque<char> &
 
 
 // int main(){
-//     std::deque<char> tapeA;
-//     std::deque<char> tapeB;
 
-//     tapeA.push_back('^');
-//     tapeA.push_back('1');
-//     tapeA.push_back('0');
-//     tapeA.push_back('1');
-//     tapeA.push_back('0');
-//     tapeA.push_back('1');
-//     tapeA.push_back('1');
-//     tapeA.push_back('0');
-//     tapeA.push_back('1');
-//     tapeA.push_back('|');
-
-//     tapeB.push_back('^');
-//     tapeB.push_back('1');
-//     tapeB.push_back('0');
-//     tapeB.push_back('1');
-//     tapeB.push_back('0');
-//     tapeB.push_back('1');
-//     tapeB.push_back('1');
-//     tapeB.push_back('0');
-//     tapeB.push_back('1');
-//     tapeB.push_back('|');
-//     TuringMachineComparator tm(tapeA, tapeB);
-//     tm.simulate();
-//     std::cout << tapeB[0] << '\n';
+//     while(true){
+//         std::deque<char> tapeA;
+//         std::deque<char> tapeB;
+//         int n, m;
+//         std::cin >> n >> m;
+//         tapeA.push_front('|');
+//         tapeB.push_front('|');
+//         while(n){
+//             tapeA.push_front(n%2+'0');
+//             n/=2;
+//         }
+//         while(m){
+//             tapeB.push_front(m%2+'0');
+//             m/=2;
+//         }
+//         tapeA.push_front('^');
+//         tapeB.push_front('^');
+//         TuringMachineComparator tm(tapeA, tapeB);
+//         tm.simulate();
+//         std::cout << tapeB.front() << std::endl;
+//     }
 // }

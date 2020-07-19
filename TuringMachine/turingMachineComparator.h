@@ -10,15 +10,14 @@ private:
     enum e_direction{Neutral,Left,Right};
     enum e_states{
         init,
-        toEnd,
         getNonZero,
-        token,
+        lengthCheck,
+        lengthCheckPA,
+        lengthCheckPB,
+        gte,
         lt,
-        eq,
-        gt,
-        goFrontl,
-        goFronte,
-        goFrontg,
+        toFrontGTE,
+        toFrontLT,
         hlt,
         
     };

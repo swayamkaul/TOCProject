@@ -52,7 +52,7 @@ int TuringMachineAdd::p_findStateTransition(char sA, char sB){
             return i;
         }
     }
-    throw "Error";
+    throw "Error in add";
 }
 
 void TuringMachineAdd::p_emmit(int transitionId){
