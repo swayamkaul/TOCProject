@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import  Image
 
-img = Image.open("img1.jpeg")
+img = Image.open("img.jpeg")
 data = np.array(img)
 
 shape = (len(data),len(data[0]),3)

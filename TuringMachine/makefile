@@ -1,0 +1,1 @@
+g++ main.cpp turingMachineAdd.cpp turingMachineMultiply.cpp turingMachineCopy.cpp turingMachineComparator.cpp -O2 -g && ./a.out 
