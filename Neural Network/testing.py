@@ -1,8 +1,10 @@
 from rishabh.NN import perceptron
 import numpy as np
 
-open('out.txt','w')as f:
-    k=f.read()
+f=open('../percentage.txt')
+k=float(f.read())
+print(k)
+
 
 X = np.array([[k]])
 
