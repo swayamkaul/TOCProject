@@ -74,8 +74,8 @@ int main(){
         counter++;
         blackPixels+=(tape2.front()=='1');
     }
-    std::ofstream output("../percentage.py");
-    output << "percentage = " << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0 << '\n';
+    std::ofstream output("../percentage.txt");
+    output << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0;
     // std::cerr << blackPixels << '\n';
     // std::cerr << counter << '\n';
     // std::cerr << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0 << '\n';
