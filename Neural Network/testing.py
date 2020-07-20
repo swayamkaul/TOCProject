@@ -14,5 +14,7 @@ weights=np.load('weights.npy')
 p = perceptron(X.shape[1])
 
 for x in X:
-    pred = p.predict(x,weights)
+    pred = p.predict(x,weights) # output to firebase as result
     print('[INFO]: Data={},  Prediction={}'.format(x, pred))
+    
+    
