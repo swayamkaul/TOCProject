@@ -76,7 +76,8 @@ int main(){
     }
     std::ofstream output("../percentage.txt");
     output << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0;
-    std::cerr << blackPixels << '\n';
-    std::cerr << counter << '\n';
-    std::cerr << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0 << '\n';
+    std::cerr << "Number of black pixels: " << blackPixels << '\n';
+    std::cerr << "Number of white pixels: " << counter - blackPixels << '\n';
+    std::cerr << "Number of pixels processed: " <<  counter << '\n';
+    std::cerr << "Percentage of white pixels" << (1.0-(blackPixels*1.0)/(counter*1.0))*100.0 << '\n';
 }
