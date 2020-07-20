@@ -1,9 +1,21 @@
 from rishabh.NN import perceptron
 import numpy as np
 print("Enter X value")
-x_in=int(input())
+
+
+f=open('../percentage.txt')
+k=float(f.read())
+x_in=k
+
+
 print("Enter Y value")
+
+# y will come from fire base
+###############
 y_in=int(input())
+###############
+
+
 X = np.array([[x_in]])
 y = np.array([[y_in]])
 
