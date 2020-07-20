@@ -1,7 +1,10 @@
 from rishabh.NN import perceptron
 import numpy as np
 
-X = np.arange(100).reshape(100,1)
+open('out.txt','w')as f:
+    k=f.read()
+
+X = np.array([[k]])
 
 print('Testing....')
 print('Loading Weights.....')
